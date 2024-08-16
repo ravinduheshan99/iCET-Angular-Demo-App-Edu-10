@@ -8,7 +8,13 @@
   </div>
 
   <!--Show alert if the validation status is invalid and the field is touched by the user-->
-  <p *ngIf="productForm.controls['name'].status=='INVALID' && productForm.controls['description'].touched" style="color: red;">Name Not Provided</p>
+  <p *ngIf="productForm.controls['name']['errors'] && productForm.controls['name'].errors['required'] && productForm.controls['name'].touched" style="color: red;">Name Not Provided</p>
+
+  <!--Show alert if the minimun length validation of the produt name is violated-->
+  <p *ngIf="productForm.controls['name']['errors'] && productForm.controls['name'].errors['minlength'] && productForm.controls['name'].touched" style="color: red;">Name Should Be More Than Or Equal To 3 Characters</p>
+
+  <!--Show alert if the maximum length validation of the produt name is violated-->
+  <p *ngIf="productForm.controls['name']['errors'] && productForm.controls['name'].errors['maxlength'] && productForm.controls['name'].touched" style="color: red;">Name Should Be Less Than Or Equal To 10 Characters</p>
 
   <div class="mt-3">
     <label class="form-label" for="txt-product-description">Product Description</label>

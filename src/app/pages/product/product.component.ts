@@ -12,7 +12,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class ProductComponent {
 
   productForm = new FormGroup({
-    name: new FormControl("Name",[Validators.required, Validators.max(10), Validators.min(3)]),
+    name: new FormControl("Name",[Validators.required, Validators.maxLength(10), Validators.minLength(3)]),
     description: new FormControl("",[Validators.required]),
     price: new FormControl(0,Validators.required)
   })
@@ -20,8 +20,12 @@ export class ProductComponent {
   submit(){
     //show overall status with validations in the form
     console.log(this.productForm);
-    //create a json object with the product information
-    console.log(this.productForm.value);
+    
+    if(this.productForm.status=='INVALID'){
+      return;
+    }
+
+    //API Call
   }
 
 }
